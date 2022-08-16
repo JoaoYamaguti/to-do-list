@@ -1,8 +1,10 @@
 @charset "UTF-8";
 
 * {
-    --color-header: #69594F;
-    --color-back: #9C8576;
+    --color-header: #362D28;
+    --color-back: #B59988;
+    --color-button: #B57851;
+    --color-back-li: #B5A49A;
 }
 
 body {
@@ -10,7 +12,8 @@ body {
     padding: 0px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 
-    background-color: var(--color-back)
+    background-color: var(--color-back);
+    box-sizing: border-box;    
 }
 
 #format {
@@ -20,12 +23,12 @@ body {
     margin: auto;
     margin-top: 100px;
 
-    border: 1px solid currentColor;
-    border-radius: 100px;
+    border-radius: 100px ;
 }
 
 header {
     height: 50px;
+    border-radius: 20px 20px 0 0;
 
     display: flex;
     align-items: center;
@@ -45,18 +48,46 @@ main {
     display: flex;
     flex-flow: column;
     justify-content: center;
+    align-items: center;
+    border-radius: 0 0 20px 20px;
     padding: 30px 70px;
 
     background-color: white;
 }
 
-main form {
+form {
     width: 100%;
     display: flex;
-    justify-content: center;
-    gap: 0.8rem;
-
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.8rem
 }
+
+form input {
+    flex: 3;
+    height: 30px;
+    border-color: var(--color-header);
+    border-radius: 10px;
+}
+
+
+button {
+    height: 38px;
+    border-color: var(--color-header);
+    border-radius: 10px;
+    background-color: var(--color-button);
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+}
+.btnform {
+    flex: 1.5;
+}
+.btnlist{
+    width: 70px;
+}
+
 
 .list-todo {
     width: 100%;
@@ -71,7 +102,26 @@ main form {
 
 .list-todo li {
     width: 100%;
+    height: 50px;
+    border-radius: 10px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--color-back-li);
 }
 
+.txtList {
+    background-color: var(--color-back-li);
+    border: none;
+}
+
+.checkList {
+    height: 20px;
+    width: 20px;
+    background-color: white;
+}
+
+.checkList:checked .txtList {
+    text-decoration: line-through;
+    color: white;
+}
