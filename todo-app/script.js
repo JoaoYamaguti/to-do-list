@@ -3,16 +3,14 @@ const txtForm = document.querySelector('#todoTxt')
 const listTodo = document.querySelector('.list-todo')
 const tasks = []
 
-let cont = 0
-
-
 btnForm.addEventListener('click', () => {   
     const isEmpty = txtForm.value === ""
+    let cont = (tasks.length + 1)
     if (!isEmpty) {
         tasks.push(`
-        <li id="${cont}">
+        <li>
             <input type="checkbox"  class="checkList">
-            <input type="text" name="txtList" class="txtList" value="${txtForm.value}">
+            <span class="txtList">${txtForm.value}</span>
             <button class="btnlist" onclick="btndel(${cont})">Delete</button>
         </li>
         `)       
@@ -24,8 +22,7 @@ btnForm.addEventListener('click', () => {
         }
     } else {
         alert('text your task!!!')
-    }
-    cont++  
+    }  
 })
 txtForm.addEventListener('keypress', function(event) {
     if (event.key === "Enter") {
@@ -37,16 +34,11 @@ txtForm.addEventListener('keypress', function(event) {
     console.log(event)
 })
 
-console.log(btnDelete)
-
-
 function btndel(idnum) {
-    tasks[idnum] = ""
+    tasks[idnum - 1] = ""
     listTodo.innerHTML = ""
     for (let i = 0; i < tasks.length; i++) {
         listTodo.innerHTML += tasks[i]
     }
     console.log(tasks)
 }
-
-
