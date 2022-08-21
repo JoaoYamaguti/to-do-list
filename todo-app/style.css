@@ -110,6 +110,8 @@ button {
 }
 
 .txtList {
+    width: 200px;
+
     background-color: var(--color-back-li);
     border: none;
 }
@@ -120,6 +122,7 @@ button {
     background-color: white;
 }
 
-input[type="checkbox"]:checked {
-    color: green;
+input[type="checkbox"]:checked ~ span{
+    color: gray;
+    text-decoration: line-through;
 }
