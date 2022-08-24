@@ -4,14 +4,15 @@ window.addEventListener('load', () =>{
     const listTodo = document.querySelector('.list-todo')
 
     let todos = [] || JSON.parse(localStorage.getItem('todos'))
+    showTodos()
 
     form.addEventListener('submit', (event) => {   
         event.preventDefault()
         const isEmpty = txtForm.value == ""
         if (!isEmpty) {
+            todos = JSON.parse(localStorage.getItem('todos')) || []
 
             const todo = {
-                'id' : listTodo.childElementCount,
                 'content' : txtForm.value,
                 'done' : false
             }
@@ -27,19 +28,18 @@ window.addEventListener('load', () =>{
             alert('type your task!!!')
         }
     })
-    showTodos()
 })
 
 function showTodos() {
     const listTodo = document.querySelector('.list-todo')
     listTodo.innerHTML = ""
 
-    const todoList = JSON.parse(localStorage.getItem('todos'))
+    let todos = JSON.parse(localStorage.getItem('todos')) || []
 
-    console.log(todoList)
+    console.log(todos)
     
 
-    todoList.forEach(item => {
+    todos.forEach(item => {
         const li = document.createElement('li')
         li.setAttribute('id', `${item.id}`)
         
@@ -66,20 +66,20 @@ function showTodos() {
 
         listTodo.appendChild(li)
 
-        let indexItem = todoList.indexOf(item)
         btnDel.addEventListener('click', ()=>{
-            todoList.splice(indexItem, 1)
-            localStorage.setItem('todos', JSON.stringify(todoList))
+            todos = todos.filter(t => t!= item)
+            localStorage.setItem('todos', JSON.stringify(todos))
             listTodo.removeChild(li)
         })
-
+        
+        let indexItem = todos.indexOf(item)
         inputcheck.addEventListener('change', () => {
             if (inputcheck.checked) {
-                todoList[indexItem].done = true
+                todos[indexItem].done = true
             } else {
-                todoList[indexItem].done = false
+                todos[indexItem].done = false
             }
-            localStorage.setItem('todos', JSON.stringify(todoList))
+            localStorage.setItem('todos', JSON.stringify(todos))
         })
     })
 }
