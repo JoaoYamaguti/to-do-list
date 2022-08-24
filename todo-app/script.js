@@ -12,7 +12,8 @@ window.addEventListener('load', () =>{
 
             const todo = {
                 'id' : listTodo.childElementCount,
-                'content' : txtForm.value
+                'content' : txtForm.value,
+                'done' : false
             }
 
             todos.push(todo)
@@ -26,7 +27,6 @@ window.addEventListener('load', () =>{
             alert('type your task!!!')
         }
     })
-
     showTodos()
 })
 
@@ -46,6 +46,9 @@ function showTodos() {
         const inputcheck = document.createElement('input')
         inputcheck.type ='checkbox'
         inputcheck.classList.add('checkList')
+        if (item.done) {
+            inputcheck.checked = true
+        }
         li.appendChild(inputcheck)
 
         const inputtxt = document.createElement('input')
@@ -63,11 +66,20 @@ function showTodos() {
 
         listTodo.appendChild(li)
 
+        let indexItem = todoList.indexOf(item)
         btnDel.addEventListener('click', ()=>{
-            let indexItem = todoList.indexOf(item)
             todoList.splice(indexItem, 1)
             localStorage.setItem('todos', JSON.stringify(todoList))
             listTodo.removeChild(li)
+        })
+
+        inputcheck.addEventListener('change', () => {
+            if (inputcheck.checked) {
+                todoList[indexItem].done = true
+            } else {
+                todoList[indexItem].done = false
+            }
+            localStorage.setItem('todos', JSON.stringify(todoList))
         })
     })
 }
